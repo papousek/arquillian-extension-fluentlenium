@@ -1,6 +1,7 @@
 package org.jboss.arquillian.extension.fluentlenium.impl;
 
 import java.lang.annotation.Annotation;
+
 import org.jboss.arquillian.core.api.Instance;
 import org.jboss.arquillian.core.api.annotation.Inject;
 import org.jboss.arquillian.drone.impl.DroneContext;
@@ -12,14 +13,13 @@ public class FluentLeniumResourceProvider implements ResourceProvider {
 
     @Inject
     private Instance<DroneContext> droneContext;
-
+    
     public boolean canProvide(Class<?> type) {
         return FluentLenium.class.isAssignableFrom(type);
     }
 
     public Object lookup(final ArquillianResource annotation, final Annotation... qualifiers) {
         WebDriver driver = getDriver(qualifiers);
-
         return new FluentLenium(driver);
     }
 
